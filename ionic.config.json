@@ -1,0 +1,7 @@
+{
+  "name": "MobSpec",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
