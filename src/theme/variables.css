@@ -76,6 +76,8 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-tint: #f5f6f9;
   --theme-background-color: #F9A3A3;
   --them-title-color: #744253;
+  --light-text-color: #744253;
+  --regular-black: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
