@@ -39,14 +39,14 @@ const seeAllBrand = () =>{
                 <ion-row>
                     <ion-col>
                         <div class="brand-container">
-                            <div class="brand-item" v-for="(brand,index) in brandStore.brandList" :key="index">
-                                <div class="brand-name">
-                                    {{brand.brand_name}}
-                                </div>
-<!--                                <div class="item-count">-->
-<!--                                    (584)-->
-<!--                                </div>-->
-                            </div>
+                            <ion-button fill="clear" class="brand-item" v-for="(brand,index) in brandStore.brandList" :key="index" :router-link="`/device-list/${brand.id}`">
+                                    <div class="brand-name">
+                                        {{brand.brand_name}}
+                                    </div>
+                                    <!--                                <div class="item-count">-->
+                                    <!--                                    (584)-->
+                                    <!--                                </div>-->
+                            </ion-button>
                         </div>
                     </ion-col>
                 </ion-row>
@@ -77,7 +77,6 @@ const seeAllBrand = () =>{
         color: var(--regular-black);
     }
 
-
     .search-box{
         display: flex;
         flex-direction: row;
@@ -100,12 +99,13 @@ const seeAllBrand = () =>{
     display: grid;
     grid-template-columns: auto auto;
     .brand-item{
-        padding: 10px;
+        padding: 2px;
         background: #FCF6B1;
-        margin: 5px;
+        margin: 3px;
         color: #0d0d0d;
         text-align: center;
         border-radius: 10px;
+        cursor: pointer;
         .brand-name{
             font-weight: bold;
             color: #371E30;

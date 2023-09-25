@@ -1,5 +1,5 @@
-import {defineStore} from "pinia";
-import {BrandInterface} from "@/types/brand";
+import { defineStore } from "pinia";
+import { BrandInterface } from "@/types/brand";
 import axios from "axios";
 import API_URL from '@/config';
 
@@ -12,12 +12,12 @@ export const useBrandStore = defineStore('all-brand', {
     },
     actions: {
         async setBrandList() {
-            const { data } = await axios.get(`${API_URL}/brand-list`);
+            const { data } = await axios.get(`${API_URL}/api/brand-list`);
             this.brandList = data.brands;
             console.log(data.brands);
         },
         async setBrandListAll() {
-            const { data } = await axios.get(`${API_URL}/brand-list-all`);
+            const { data } = await axios.get(`${API_URL}/api/brand-list-all`);
             this.brandList = data.brands;
             console.log(data.brands);
         },

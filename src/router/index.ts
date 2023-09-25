@@ -3,6 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 import HomePage from '@/views/pages/HomePage.vue';
 import BrandPage from '@/views/pages/BrandPage.vue';
 import SigninPage from "@/views/pages/SigninPage.vue";
+import DeviceListPage from "@/views/pages/DevicelistPage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,6 +19,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/brand',
     name: 'Brand',
     component: BrandPage
+  },
+  {
+    path: '/device-list/:id',
+    name: 'DeviceList',
+    component: DeviceListPage
   },
   {
     path: '/signin',
