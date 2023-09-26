@@ -4,6 +4,7 @@ import { IonGrid, IonRow, IonCol, IonInput, IonIcon, IonList, IonItem, IonImg, I
 import {useProductStore} from "@/store/product";
 import API_URL from "@/config";
 import {useRoute} from "vue-router";
+import NoImage from "@/assets/images/noimage.webp";
 
 const route =  useRoute();
 const brand_id =  route.params.id;
@@ -24,8 +25,8 @@ productStore.setProductList(brand_id);
                                 <div style="display: flex; flex-direction: row; margin-top: 10px">
                                     <div class="image-wrapper">
                                         <ion-img
-                                            :src="`${API_URL}/product_image/${item?.image_name}.jpg`"
-                                            alt="The Wisconsin State Capitol building in Madison, WI at night"
+                                            :alt="item?.image_name"
+                                            :src="item?.image_name?`${API_URL}/product_image/${item?.image_name}.jpg`:NoImage"
                                         ></ion-img>
                                     </div>
                                     <div class="text-wrapper">
