@@ -33,7 +33,7 @@ productStore.setProductList(brand_id);
                                             {{item?.product_name}}
                                         </div>
                                         <div class="description">
-                                            {{item.spotlight_feature}}
+                                            {{ item?.spotlight_feature.replace(/[^a-zA-Z0-9 , - . ]/g, "")}}
                                         </div>
                                     </div>
                                 </div>
