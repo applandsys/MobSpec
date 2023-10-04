@@ -4,6 +4,7 @@ import HomePage from '@/views/pages/HomePage.vue';
 import BrandPage from '@/views/pages/BrandPage.vue';
 import SigninPage from "@/views/pages/SigninPage.vue";
 import DeviceListPage from "@/views/pages/DevicelistPage.vue";
+import DeviceDetail from "@/views/pages/DeviceDetail.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -24,6 +25,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/device-list/:id',
     name: 'DeviceList',
     component: DeviceListPage
+  },
+  {
+    path: '/device-detail/:product_id',
+    name: 'DeviceDetail',
+    component: DeviceDetail
   },
   {
     path: '/signin',

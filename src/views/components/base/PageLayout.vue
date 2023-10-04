@@ -1,8 +1,19 @@
 <script lang="ts" setup>
-import {IonContent, IonPage, IonToolbar, IonHeader, IonTitle, IonButton, IonBackButton , IonButtons, IonMenuButton } from "@ionic/vue";
+import {
+    IonContent,
+    IonPage,
+    IonToolbar,
+    IonHeader,
+    IonTitle,
+    IonButton,
+    IonBackButton,
+    IonButtons,
+    IonLoading
+} from "@ionic/vue";
 
 interface Props{
     pageTitle: string;
+    isLoading?: boolean
 }
 const {pageTitle} =  defineProps<Props>();
 </script>
@@ -21,6 +32,7 @@ const {pageTitle} =  defineProps<Props>();
                 <slot></slot>
             </div>
         </ion-content>
+        <ion-loading :isOpen="isLoading" message="Loading..." spinner="circles"></ion-loading>
     </ion-page>
 </template>
 

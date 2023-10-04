@@ -15,7 +15,6 @@ export const useProductStore = defineStore('all-product',{
             const { data } = await axios.get(`${API_URL}/api/product-list-by-brand`,{ params: { brand_id: brandId } });
             this.productByBrand = data.product;
             this.brandInfo = data.brand;
-            console.log(data);
         },
     }
 });

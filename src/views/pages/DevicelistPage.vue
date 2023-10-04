@@ -21,8 +21,8 @@ productStore.setProductList(brand_id);
                 <ion-row>
                     <ion-col>
                         <ion-list lines="full" class="device-list">
-                            <ion-item v-for="(item,index) in productStore.productByBrand" :key="index">
-                                <div style="display: flex; flex-direction: row; margin-top: 10px">
+                            <ion-item v-for="(item,index) in productStore.productByBrand" :key="index" :router-link="`/device-detail/${item.id}`">
+                                <div class="product-wrapper">
                                     <div class="image-wrapper">
                                         <ion-img
                                             :alt="item?.image_name"
@@ -70,5 +70,9 @@ productStore.setProductList(brand_id);
 
 ion-item{
     background-color: #2dd36f;
+}
+
+.product-wrapper{
+    display: flex; flex-direction: row; margin-top: 10px;
 }
 </style>

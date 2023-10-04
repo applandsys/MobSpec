@@ -19,7 +19,6 @@ export const useBrandStore = defineStore('all-brand', {
         async setBrandListAll() {
             const { data } = await axios.get(`${API_URL}/api/brand-list-all`);
             this.brandList = data.brands;
-            console.log(data.brands);
         },
     },
 })

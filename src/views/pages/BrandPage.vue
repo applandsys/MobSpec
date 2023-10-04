@@ -31,7 +31,7 @@ const seeAllBrand = () =>{
                                     <ion-icon :src="searchCircleOutline" size="large" style=" margin-left: 10px"></ion-icon>
                                 </div>
                                 <div style=" margin-left: 12px">
-                                    <ion-input type="text" name="email" placeholder="Search by Brand or Model" ></ion-input>
+                                    <ion-input type="text" name="email" placeholder="Search by Brand" ></ion-input>
                                 </div>
                             </div>
                     </ion-col>
@@ -99,9 +99,10 @@ const seeAllBrand = () =>{
     display: grid;
     grid-template-columns: auto auto;
     .brand-item{
-        padding: 2px;
+        padding: 1px;
         background: #FCF6B1;
-        margin: 3px;
+        margin-right: 5px;
+        margin-bottom: 5px;
         color: #0d0d0d;
         text-align: center;
         border-radius: 10px;
@@ -109,7 +110,7 @@ const seeAllBrand = () =>{
         .brand-name{
             font-weight: bold;
             color: #371E30;
-            font-size: 18px;
+            font-size: 16px;
         }
         .item-count{
 
