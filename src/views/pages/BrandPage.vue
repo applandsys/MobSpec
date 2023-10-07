@@ -4,6 +4,7 @@ import { IonGrid, IonRow, IonCol, IonInput, IonIcon, IonItem, IonImg, IonButton}
 import { searchCircleOutline, arrowForwardOutline, personAddOutline } from "ionicons/icons";
 
 import {useBrandStore} from "@/store/brand";
+import {ref} from "vue";
 
 const brandStore =  useBrandStore();
 
@@ -11,6 +12,11 @@ brandStore.setBrandList();
 
 const seeAllBrand = () =>{
     brandStore.setBrandListAll();
+}
+
+const handleSearchBrand = (event)=>{
+    brandStore.setBrandListAll();
+    brandStore.setKeyword(event.target.value)
 }
 
 </script>
@@ -22,7 +28,7 @@ const seeAllBrand = () =>{
                     <ion-col><h2 class="ion-text-center app-title">Mob Spec</h2></ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col class="ion-text-center sub-title">Mobile Specification and Review</ion-col>
+                    <ion-col class="ion-text-center sub-title">Mobile Specification and Review </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>
@@ -31,7 +37,7 @@ const seeAllBrand = () =>{
                                     <ion-icon :src="searchCircleOutline" size="large" style=" margin-left: 10px"></ion-icon>
                                 </div>
                                 <div style=" margin-left: 12px">
-                                    <ion-input type="text" name="email" placeholder="Search by Brand" ></ion-input>
+                                    <ion-input type="text" name="email" placeholder="Search by Brand" @ionInput="handleSearchBrand($event)" ></ion-input>
                                 </div>
                             </div>
                     </ion-col>
@@ -39,7 +45,7 @@ const seeAllBrand = () =>{
                 <ion-row>
                     <ion-col>
                         <div class="brand-container">
-                            <ion-button fill="clear" class="brand-item" v-for="(brand,index) in brandStore.brandList" :key="index" :router-link="`/device-list/${brand.id}`">
+                            <ion-button fill="clear" class="brand-item" v-for="(brand,index) in brandStore.searchBrand" :key="index" :router-link="`/device-list/${brand.id}`">
                                     <div class="brand-name">
                                         {{brand.brand_name}}
                                     </div>
@@ -57,11 +63,11 @@ const seeAllBrand = () =>{
                         </div>
                     </ion-col>
                 </ion-row>
-                <ion-row>
-                    <ion-col class="ion-text-center">
-                        <ion-button shape="round"  size="large" color="tertiary">Sign in / Sign up <ion-icon slot="end" :icon="personAddOutline"></ion-icon></ion-button>
-                    </ion-col>
-                </ion-row>
+<!--                <ion-row>-->
+<!--                    <ion-col class="ion-text-center">-->
+<!--                        <ion-button shape="round"  size="large" color="tertiary">Sign in / Sign up <ion-icon slot="end" :icon="personAddOutline"></ion-icon></ion-button>-->
+<!--                    </ion-col>-->
+<!--                </ion-row>-->
             </ion-grid>
         </div>
     </PageLayout>

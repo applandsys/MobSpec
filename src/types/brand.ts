@@ -1,5 +1,8 @@
+import {Nullable} from "vitest";
+
 export interface BrandInterface{
     brandList: BrandItem[] | [];
+    searchKeyword:  Nullable<string>;
 }
 
 export interface BrandItem {
