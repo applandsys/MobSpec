@@ -15,7 +15,7 @@ interface Props{
     pageTitle: string;
     isLoading?: boolean
 }
-const {pageTitle} =  defineProps<Props>();
+const {pageTitle, isLoading} =  defineProps<Props>();
 </script>
 <template>
     <ion-page>

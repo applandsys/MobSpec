@@ -15,7 +15,7 @@ const seeAllBrand = () =>{
 
 </script>
 <template>
-    <PageLayout page-title="Brands Page">
+    <PageLayout page-title="Brands">
         <div id="container">
             <ion-grid>
                 <ion-row>
@@ -110,7 +110,7 @@ const seeAllBrand = () =>{
         .brand-name{
             font-weight: bold;
             color: #371E30;
-            font-size: 16px;
+            font-size: 15px;
         }
         .item-count{
 

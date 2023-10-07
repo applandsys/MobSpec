@@ -5,15 +5,20 @@ import {useProductStore} from "@/store/product";
 import API_URL from "@/config";
 import {useRoute} from "vue-router";
 import NoImage from "@/assets/images/noimage.webp";
+import {ref} from "vue";
+
+const isLoading = ref(false); n
 
 const route =  useRoute();
 const brand_id =  route.params.id;
 const productStore = useProductStore();
 productStore.setProductList(brand_id);
 
+
+
 </script>
 <template>
-    <PageLayout page-title="Brands Page">
+    <PageLayout page-title="Brands">
             <ion-grid>
                 <ion-row>
                     <ion-col><h2 class="ion-text-center app-title">Device List of  {{productStore.brandInfo?.brand_name}}</h2></ion-col>
@@ -74,5 +79,10 @@ ion-item{
 
 .product-wrapper{
     display: flex; flex-direction: row; margin-top: 10px;
+}
+
+.app-title{
+    color: #1e2023;
+    font-family: "Arial Black";
 }
 </style>
