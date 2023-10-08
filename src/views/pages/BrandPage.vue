@@ -21,7 +21,7 @@ const handleSearchBrand = (event)=>{
 
 </script>
 <template>
-    <PageLayout page-title="Brands">
+    <PageLayout page-title="Brands" :is-loading="brandStore.isLoading">
         <div id="container">
             <ion-grid>
                 <ion-row>
@@ -94,11 +94,6 @@ const handleSearchBrand = (event)=>{
         }
     }
 
-    ion-icon {
-        --ionicon-stroke-width: 30px;
-        color: #000;
-    }
-
 }
 
 .brand-container {
@@ -135,5 +130,10 @@ const handleSearchBrand = (event)=>{
 .icon-forward{
     margin-top: 1px;
     position: absolute;
+}
+
+ion-icon {
+    --ionicon-stroke-width: 30px;
+    color: #000;
 }
 </style>

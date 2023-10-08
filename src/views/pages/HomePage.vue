@@ -45,7 +45,7 @@ import {IonImg, IonButton} from "@ionic/vue";
         color: #000000;
     }
     .hero-image{
-        margin-botoom: 20px;
+        margin-bottom: 20px;
     }
     .lower-third{
         margin-top: 7px;

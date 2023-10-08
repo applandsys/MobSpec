@@ -4,7 +4,7 @@ import {IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonImg} from "@ioni
 import API_URL from "@/config";
 import { useRoute } from "vue-router";
 import NoImage from "@/assets/images/noimage.webp";
-import {onMounted, ref} from "vue";
+import {onMounted, onUnmounted, ref} from "vue";
 import axios from "axios";
 import {useBrandStore} from "@/store/brand";
 
@@ -12,7 +12,7 @@ const route =  useRoute();
 const product_id =  route.params.product_id;
 
 const productDetail =  ref([]);
-const isLoading = ref(true);
+const isLoading = ref(false);
 
 const brandStore =  useBrandStore();
 
@@ -45,6 +45,11 @@ onMounted(async ()=>{
     productDetail.value = data;
     isLoading.value = false;
 })
+
+onUnmounted(()=>{
+    isLoading.value = false;
+})
+
 
 </script>
 <template>
