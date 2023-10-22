@@ -28,7 +28,7 @@ const {pageTitle, isLoading} =  defineProps<Props>();
             </ion-toolbar>
         </ion-header>
         <ion-content :fullscreen="true" >
-            <div class="main-content">
+            <div class="main-content  xc">
                 <slot></slot>
             </div>
         </ion-content>
@@ -49,5 +49,12 @@ ion-button{
 .main-content{
     margin-left: 24px;
     margin-right: 24px;
+}
+
+
+.xc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>

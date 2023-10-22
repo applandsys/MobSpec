@@ -23,6 +23,7 @@ ion-content {
     background-position-x: -100px;
     background-position-y: -100px;
     background-repeat: no-repeat;
+    position: absolute;
 
 }
 

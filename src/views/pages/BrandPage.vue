@@ -4,20 +4,33 @@ import { IonGrid, IonRow, IonCol, IonInput, IonIcon, IonItem, IonImg, IonButton}
 import { searchCircleOutline, arrowForwardOutline, personAddOutline } from "ionicons/icons";
 
 import {useBrandStore} from "@/store/brand";
-import {ref} from "vue";
+import {ref, watch} from "vue";
 
 const brandStore =  useBrandStore();
 
-brandStore.setBrandList();
+if(brandStore.searchBrand.length ===0){
+    brandStore.setBrandList();
+}
+
+const searchKeyword = ref('');
 
 const seeAllBrand = () =>{
     brandStore.setBrandListAll();
 }
 
 const handleSearchBrand = (event)=>{
-    brandStore.setBrandListAll();
+    searchKeyword.value = event.target.value;
     brandStore.setKeyword(event.target.value)
 }
+
+watch(()=>{searchKeyword.value},(newVal)=>{
+    if(brandStore.searchBrand.length <10){
+        brandStore.setBrandListAll();
+    }
+    if(newVal==='' || newVal===null){
+        brandStore.setBrandListAll();
+    }
+})
 
 </script>
 <template>
@@ -59,7 +72,7 @@ const handleSearchBrand = (event)=>{
                 <ion-row>
                     <ion-col>
                         <div class="see-all">
-                            <ion-button fill="clear" @click="seeAllBrand"> See All Brands  <ion-icon  :src="arrowForwardOutline"></ion-icon></ion-button>
+                            <ion-button fill="clear" @click="seeAllBrand" v-if="brandStore.searchBrand.length < 15"> See All Brands  <ion-icon  :src="arrowForwardOutline"></ion-icon></ion-button>
                         </div>
                     </ion-col>
                 </ion-row>
@@ -74,6 +87,7 @@ const handleSearchBrand = (event)=>{
 </template>
 <style scoped>
 #container {
+    margin-top: 10px;
     .app-title{
         color: var(--light-text-color);
         font-weight: bold;
@@ -125,11 +139,6 @@ const handleSearchBrand = (event)=>{
     text-align: end;
     display: block;
     cursor: pointer;
-}
-
-.icon-forward{
-    margin-top: 1px;
-    position: absolute;
 }
 
 ion-icon {

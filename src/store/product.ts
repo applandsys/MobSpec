@@ -6,10 +6,18 @@ export const useProductStore = defineStore('all-product',{
     state: () =>({
         brandInfo: [],
         productByBrand: [],
+        searchKeyword: '',
         isLoading: false
     }),
     getters: {
-
+        searchModel: (state) =>
+        {
+            if (state.searchKeyword !== '') {
+                return state.productByBrand.filter(item => item?.product_name.toLowerCase().includes(state?.searchKeyword.toLowerCase()));
+            } else {
+                return state.productByBrand;
+            }
+        }
     },
     actions: {
         async setProductList(brandId: number | string) {
@@ -18,6 +26,9 @@ export const useProductStore = defineStore('all-product',{
             this.productByBrand = data.product;
             this.brandInfo = data.brand;
             this.isLoading = false;
+        },
+        setKeyword(payload: string){
+            this.searchKeyword = payload;
         }
     }
 });

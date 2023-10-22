@@ -56,7 +56,7 @@ onUnmounted(()=>{
     <PageLayout page-title="Device Detail" :is-loading="isLoading">
         <ion-grid>
             <ion-row>
-                <ion-col><div class="find-compare"> Find a  Compare    <span v-if="compareProduct?.product?.length"> with  {{compareProduct?.product?.length}} devices </span></div></ion-col>
+                <ion-col><div class="find-compare"> Find a  Compare    <span v-if="productList?.product?.length"> with  {{productList?.product?.length}} devices </span></div></ion-col>
             </ion-row>
             <ion-row>
                 <ion-col>
@@ -86,6 +86,14 @@ onUnmounted(()=>{
                                     <ion-img
                                         :alt="productDetail?.product_name"
                                         :src="productDetail?.image_name?`${API_URL}/product_image/${productDetail?.image_name}.jpg`:NoImage"
+                                    ></ion-img>
+                                </div>
+                            </ion-col>
+                            <ion-col v-if="compareProduct?.product?.length">
+                                <div class="image-wrapper-compare">
+                                    <ion-img
+                                        :alt="compareProduct?.product_name"
+                                        :src="compareProduct?.image_name?`${API_URL}/product_image/${compareProduct?.image_name}.jpg`:NoImage"
                                     ></ion-img>
                                 </div>
                             </ion-col>
@@ -123,7 +131,7 @@ onUnmounted(()=>{
     color: #000;
     padding: 5px;
     text-align: center;
-    background: coral;
+    background: #ff8457;
     font-size: 20px;
     font-weight: bold;
 }
@@ -151,8 +159,14 @@ ion-select{
 }
 
 .image-wrapper{
-    border: 3px solid #ddd;
+    border: 5px solid #ff8457;
     margin: 10px;
+}
+
+.image-wrapper-compare{
+    border: 5px solid #ffd948;
+    margin: 10px;
+    background-color: #ffd948;
 }
 
 .find-compare{
