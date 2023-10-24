@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import {IonApp, IonRouterOutlet, useBackButton, useIonRouter} from '@ionic/vue';
 import { App } from '@capacitor/app';
+import '@/theme/style.css';
 
 
 const ionRouter = useIonRouter();

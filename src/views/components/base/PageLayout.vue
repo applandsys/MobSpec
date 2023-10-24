@@ -57,4 +57,5 @@ ion-button{
     align-items: center;
     justify-content: center;
 }
+
 </style>

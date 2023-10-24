@@ -4,7 +4,7 @@ interface Props{
     icon: string;
     placeholder: string;
     modelValue: string;
-    isRequired: boolean;
+    isRequired?: boolean;
 }
 const {icon,placeholder,modelValue,isRequired} =  defineProps<Props>();
 defineEmits(['update:modelValue']);
