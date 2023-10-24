@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import PageLayout from "@/views/components/base/PageLayout.vue";
-import {IonCol, IonGrid, IonRow, IonInput, IonItem, IonList, IonButton} from "@ionic/vue";
+import {IonCol, IonGrid, IonRow, IonButton, IonIcon} from "@ionic/vue";
 import InputText from "@/views/components/common/InputText.vue";
 import {personCircleOutline, personOutline, mailOutline, lockClosedOutline} from "ionicons/icons";
 import {ref} from "vue";
+import {UserData} from "@/types/userinfo";
 
-const userName = ref<string>('');
-const userEmail = ref<string>('');
-const userPassword = ref<string>('');
+const userData =  ref<UserData>(
+    {
+        username: '',
+        email: '',
+        password: ''
+    }
+);
 
 </script>
 <template>
@@ -15,24 +20,29 @@ const userPassword = ref<string>('');
         <div id="container">
             <ion-grid>
                 <ion-row>
+                    <ion-col class="ion-text-center ion-margin-top">
+                        <ion-icon :src="personCircleOutline" style="font-size: 100px"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
                     <ion-col>
                         <h2 class="ion-text-center app-title">Sign up form</h2>
-                        <p class="ion-text-center ion-color-dark">Sign up to use extra features like give review, rating, fav list etc.</p>
+                        <p class="ion-text-center ion-color-dark info-text">Sign up to use extra features like give review, rating, fav list etc.</p>
                     </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        <InputText :icon="personOutline" placeholder="Input Username"  :model-value="userName" @update:model-value="newValue => userName = newValue"/>
+                        <InputText :icon="personOutline" placeholder="Input Username"  :model-value="userData.username" @update:model-value="newValue => userData.username = newValue" :is-required="true"/>
                     </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        <InputText :icon="mailOutline" placeholder="Input Email"  :model-value="userEmail" @update:model-value="newValue => userEmail = newValue"/>
+                        <InputText :icon="mailOutline" placeholder="Input Email"  :model-value="userData.email" @update:model-value="newValue => userData.email = newValue" :is-required="true"/>
                     </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        <InputText :icon="lockClosedOutline" placeholder="Input Password"  :model-value="userPassword" @update:model-value="newValue => userPassword = newValue"/>
+                        <InputText :icon="lockClosedOutline" placeholder="Input Password"  :model-value="userData.password" @update:model-value="newValue => userData.password = newValue" :is-required="true"/>
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -54,5 +64,9 @@ h2{
 }
 placeholder{
     color: #000000;
+}
+
+.info-text{
+    color: #65035e;
 }
 </style>
