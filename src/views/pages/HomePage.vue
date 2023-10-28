@@ -107,9 +107,7 @@ import router from "@/router";
     color: #ed576b;
 }
 
-.m20{
-    margin: 20px;
-}
+
 
 .signup-login-text{
    display: flex;

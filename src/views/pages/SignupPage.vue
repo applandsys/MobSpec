@@ -6,20 +6,24 @@ import {personCircleOutline, personOutline, mailOutline, lockClosedOutline} from
 import {reactive, ref} from "vue";
 import {UserData} from "@/types/userinfo";
 import CommonForm from "@/views/components/common/Form.vue";
+import axios from "axios";
+import API_URL from "@/config";
 
 const error = reactive<UserData>({
-    username: '',
+    name: '',
     email:'',
     password:''
 });
 
 const userData =  reactive<UserData>(
     {
-        username: '',
+        name: '',
         email: '',
         password: ''
     }
 );
+
+const isLoading = ref(false);
 
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
@@ -27,15 +31,22 @@ function validateEmail(email) {
 }
 
 const resetError = () =>{
-    error.username ='';
+    error.name ='';
     error.email ='';
     error.password ='';
 }
 
+const submitRequestSend = async (formData: UserData) =>{
+    isLoading.value = true;
+    const { data } = await axios.post(`${API_URL}/api/register`,formData);
+    console.log(data);
+    isLoading.value = false;
+}
+
 const signupSubmit = () =>{
     resetError();
-    if(userData.username===''){
-        error.username = 'Username cant not be null';
+    if(userData.name===''){
+        error.name = 'Username cant not be null';
     }
     if(userData.email===''){
         error.email = 'Email cant not be null';
@@ -47,7 +58,9 @@ const signupSubmit = () =>{
         error.password = 'Password cant not be null';
     }
 
-
+    if( error.name ==='' && error.email ==='' &&  error.password ===''){
+        submitRequestSend(userData);
+    }
 }
 
 </script>
@@ -69,8 +82,8 @@ const signupSubmit = () =>{
                 <CommonForm>
                     <ion-row>
                         <ion-col>
-                            <InputText :icon="personOutline" placeholder="Input Username"  :model-value="userData.username" @update:model-value="newValue => userData.username = newValue" :is-required="true"/>
-                            <span class="error-text ion-text-center">{{error.username}}</span>
+                            <InputText :icon="personOutline" placeholder="Input Your Name"  :model-value="userData.name" @update:model-value="newValue => userData.name = newValue" :is-required="true"/>
+                            <span class="error-text ion-text-center">{{error.name}}</span>
                         </ion-col>
                     </ion-row>
                     <ion-row>
@@ -107,7 +120,5 @@ placeholder{
     color: #000000;
 }
 
-.info-text{
-    color: #65035e;
-}
+
 </style>

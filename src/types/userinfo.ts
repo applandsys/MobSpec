@@ -1,5 +1,5 @@
 export interface UserData extends LoginData{
-    username: string;
+    name: string;
 }
 
 export interface LoginData{
