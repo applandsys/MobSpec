@@ -9,6 +9,7 @@ import CommonForm from "@/views/components/common/Form.vue";
 import axios from "axios";
 import API_URL from "@/config";
 import {useAuth} from "@/store/auth";
+import {useValidateEmail} from "@/composables/emailValidation";
 
 const error = reactive<UserData>({
     name: '',
@@ -24,15 +25,9 @@ const userData =  reactive<UserData>(
     }
 );
 
-
 const isLoading = ref(false);
 
 const authStore = useAuth();
-
-function validateEmail(email) {
-    var re = /\S+@\S+\.\S+/;
-    return re.test(email);
-}
 
 const resetError = () =>{
     error.name ='';
@@ -61,10 +56,7 @@ const signupSubmit = () =>{
     if(userData.name===''){
         error.name = 'Username cant not be null';
     }
-    if(userData.email===''){
-        error.email = 'Email cant not be null';
-    }
-    if(!validateEmail(userData.email)){
+    if(!useValidateEmail(userData.email)){
         error.email = 'Email must need to be valid';
     }
     if(userData.password===''){
