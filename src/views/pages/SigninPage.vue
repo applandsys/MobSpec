@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import PageLayout from "@/views/components/base/PageLayout.vue";
-import {IonCol, IonGrid, IonRow, IonButton, IonIcon} from "@ionic/vue";
 import InputText from "@/views/components/common/InputText.vue";
-import {personCircleOutline, personOutline, mailOutline, lockClosedOutline} from "ionicons/icons";
+import {IonCol, IonGrid, IonRow, IonButton, IonIcon} from "@ionic/vue";
+import {personCircleOutline, mailOutline, lockClosedOutline} from "ionicons/icons";
 import {reactive, ref} from "vue";
 import {AuthData, LoginData} from "@/types/userinfo";
 import CommonForm from "@/views/components/common/Form.vue";

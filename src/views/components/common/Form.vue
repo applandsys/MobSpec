@@ -2,7 +2,6 @@
 const emit = defineEmits(['formSubmit']);
 
 const submitForm = ($event) =>{
-    console.log("inform");
     emit('formSubmit',$event.target.value);
 }
 </script>
