@@ -4,10 +4,11 @@ import {IonCol, IonGrid, IonRow, IonButton, IonIcon} from "@ionic/vue";
 import InputText from "@/views/components/common/InputText.vue";
 import {personCircleOutline, personOutline, mailOutline, lockClosedOutline} from "ionicons/icons";
 import {reactive, ref} from "vue";
-import {UserData} from "@/types/userinfo";
+import {AuthData, UserData} from "@/types/userinfo";
 import CommonForm from "@/views/components/common/Form.vue";
 import axios from "axios";
 import API_URL from "@/config";
+import {useAuth} from "@/store/auth";
 
 const error = reactive<UserData>({
     name: '',
@@ -23,7 +24,10 @@ const userData =  reactive<UserData>(
     }
 );
 
+
 const isLoading = ref(false);
+
+const authStore = useAuth();
 
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
@@ -39,7 +43,16 @@ const resetError = () =>{
 const submitRequestSend = async (formData: UserData) =>{
     isLoading.value = true;
     const { data } = await axios.post(`${API_URL}/api/register`,formData);
-    console.log(data);
+    const authInfoPayload: AuthData = {
+       isLogin: true,
+       token: data.token,
+       userInfo: {
+           name:  data.data.user_data.name,
+           email:  data.data.user_data.email,
+           id:  data.data.user_data.id
+       }
+    }
+    await authStore.setAuthInfo(authInfoPayload);
     isLoading.value = false;
 }
 
