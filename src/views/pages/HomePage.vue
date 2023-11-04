@@ -3,6 +3,11 @@ import HomeLayout from "@/views/components/base/HomeLayout.vue";
 import HeroImage from "@/assets/images/homepage_hero.png";
 import {IonImg, IonButton, IonRow, IonGrid, IonCol} from "@ionic/vue";
 import router from "@/router";
+import {useAuth} from "@/store/auth";
+
+const authStore = useAuth();
+authStore.token!==''?? router.push('/brand');
+
 </script>
 <template>
    <HomeLayout>
@@ -10,6 +15,7 @@ import router from "@/router";
            <ion-grid>
                <ion-row>
                    <ion-col>
+                       {{authStore}}
                        <div class="app-title">
                            <h1>Mob Spec</h1>
                            <div class="sub-headline">Mobile Specification and Review</div>

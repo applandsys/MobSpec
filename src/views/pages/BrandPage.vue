@@ -1,44 +1,53 @@
 <script setup lang="ts">
 import PageLayout from "@/views/components/base/PageLayout.vue";
-import { IonGrid, IonRow, IonCol, IonInput, IonIcon, IonItem, IonImg, IonButton} from "@ionic/vue";
-import { searchCircleOutline, arrowForwardOutline, personAddOutline } from "ionicons/icons";
+import { IonGrid, IonRow, IonCol, IonInput, IonIcon, IonButton} from "@ionic/vue";
+import { searchCircleOutline, arrowForwardOutline } from "ionicons/icons";
+import {computed, ref, watch} from "vue";
+import axios from "axios";
+import API_URL from "@/config";
+import {BrandItem} from "@/types/brand";
+import {useAuth} from "@/store/auth";
 
-import {useBrandStore} from "@/store/brand";
-import {ref, watch} from "vue";
-
-const brandStore =  useBrandStore();
-
-if(brandStore.searchBrand.length ===0){
-    brandStore.setBrandList();
-}
-
+const isLoading =  ref(false);
 const searchKeyword = ref('');
+const allBrand =  ref<BrandItem[]>([]);
+
+const searchBrand = computed(()=>{
+    let list = [];
+    if (searchKeyword.value !== '') {
+        list =  allBrand.value.filter(item => item?.brand_name?.toLowerCase().includes(searchKeyword.value.toLowerCase()));
+    } else {
+        list = allBrand.value;
+    }
+    return list || [];
+});
+
+const loadBrand = async () =>{
+    isLoading.value = true;
+    const { data } = await axios.get(`${API_URL}/api/brand-list-all`);
+    allBrand.value = data.brands;
+    isLoading.value = false;
+}
 
 const seeAllBrand = () =>{
-    brandStore.setBrandListAll();
+    console.log("fuck hima");
 }
 
-const handleSearchBrand = (event)=>{
-    searchKeyword.value = event.target.value;
-    brandStore.setKeyword(event.target.value)
-}
+allBrand.value.length===0 && loadBrand();
 
-watch(()=>{searchKeyword.value},(newVal)=>{
-    if(brandStore.searchBrand.length <10){
-        brandStore.setBrandListAll();
-    }
-    if(newVal==='' || newVal===null){
-        brandStore.setBrandListAll();
-    }
-})
+const authStore = useAuth();
+
+console.log("authsote", authStore.userInfo);
 
 </script>
 <template>
-    <PageLayout page-title="Brands" :is-loading="brandStore.isLoading">
+    <PageLayout page-title="Brands" :is-loading="isLoading">
         <div id="container">
             <ion-grid>
                 <ion-row>
-                    <ion-col><h2 class="ion-text-center app-title">Mob Spec</h2></ion-col>
+                    <ion-col>
+                        <h2 class="ion-text-center app-title">Mob Spec</h2>
+                    </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col class="ion-text-center sub-title">Mobile Specification and Review </ion-col>
@@ -50,7 +59,7 @@ watch(()=>{searchKeyword.value},(newVal)=>{
                                     <ion-icon :src="searchCircleOutline" size="large" style=" margin-left: 10px"></ion-icon>
                                 </div>
                                 <div style=" margin-left: 12px">
-                                    <ion-input type="text" name="email" placeholder="Search by Brand" @ionInput="handleSearchBrand($event)" ></ion-input>
+                                    <ion-input v-model="searchKeyword" type="text" name="email" placeholder="Search by Brand"  ></ion-input>
                                 </div>
                             </div>
                     </ion-col>
@@ -58,13 +67,10 @@ watch(()=>{searchKeyword.value},(newVal)=>{
                 <ion-row>
                     <ion-col>
                         <div class="brand-container">
-                            <ion-button fill="clear" class="brand-item" v-for="(brand,index) in brandStore.searchBrand" :key="index" :router-link="`/device-list/${brand.id}`">
+                            <ion-button fill="clear" class="brand-item" v-for="(brand,index) in searchBrand" :key="index" :router-link="`/device-list/${brand.id}`">
                                     <div class="brand-name">
                                         {{brand.brand_name}}
                                     </div>
-                                    <!--                                <div class="item-count">-->
-                                    <!--                                    (584)-->
-                                    <!--                                </div>-->
                             </ion-button>
                         </div>
                     </ion-col>
@@ -72,15 +78,10 @@ watch(()=>{searchKeyword.value},(newVal)=>{
                 <ion-row>
                     <ion-col>
                         <div class="see-all">
-                            <ion-button fill="clear" @click="seeAllBrand" v-if="brandStore.searchBrand.length < 15"> See All Brands  <ion-icon  :src="arrowForwardOutline"></ion-icon></ion-button>
+                            <ion-button fill="clear" @click="seeAllBrand" v-if="searchBrand.length < 15"> See All Brands  <ion-icon  :src="arrowForwardOutline"></ion-icon></ion-button>
                         </div>
                     </ion-col>
                 </ion-row>
-<!--                <ion-row>-->
-<!--                    <ion-col class="ion-text-center">-->
-<!--                        <ion-button shape="round"  size="large" color="tertiary">Sign in / Sign up <ion-icon slot="end" :icon="personAddOutline"></ion-icon></ion-button>-->
-<!--                    </ion-col>-->
-<!--                </ion-row>-->
             </ion-grid>
         </div>
     </PageLayout>
@@ -92,11 +93,9 @@ watch(()=>{searchKeyword.value},(newVal)=>{
         color: var(--light-text-color);
         font-weight: bold;
     }
-
     .sub-title{
         color: var(--regular-black);
     }
-
     .search-box{
         display: flex;
         flex-direction: row;
@@ -107,7 +106,6 @@ watch(()=>{searchKeyword.value},(newVal)=>{
             background-color: rgba(181, 220, 181, 0.5);
         }
     }
-
 }
 
 .brand-container {
@@ -126,9 +124,6 @@ watch(()=>{searchKeyword.value},(newVal)=>{
             font-weight: bold;
             color: #371E30;
             font-size: 15px;
-        }
-        .item-count{
-
         }
     }
 }

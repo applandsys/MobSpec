@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import PageLayout from "@/views/components/base/PageLayout.vue";
-import {IonCol, IonGrid, IonRow, IonButton, IonIcon} from "@ionic/vue";
+import {IonCol, IonGrid, IonRow, IonButton, IonIcon, useIonRouter} from "@ionic/vue";
 import InputText from "@/views/components/common/InputText.vue";
 import {personCircleOutline, personOutline, mailOutline, lockClosedOutline} from "ionicons/icons";
 import {reactive, ref} from "vue";
@@ -10,6 +10,8 @@ import axios from "axios";
 import API_URL from "@/config";
 import {useAuth} from "@/store/auth";
 import {useValidateEmail} from "@/composables/emailValidation";
+
+const ionRouter = useIonRouter();
 
 const error = reactive<UserData>({
     name: '',
@@ -51,7 +53,7 @@ const submitRequestSend = async (formData: UserData) =>{
     isLoading.value = false;
 }
 
-const signupSubmit = () =>{
+const signupSubmit = async () =>{
     resetError();
     if(userData.name===''){
         error.name = 'Username cant not be null';
@@ -64,7 +66,8 @@ const signupSubmit = () =>{
     }
 
     if( error.name ==='' && error.email ==='' &&  error.password ===''){
-        submitRequestSend(userData);
+        await submitRequestSend(userData);
+        ionRouter.push('/brand');
     }
 }
 

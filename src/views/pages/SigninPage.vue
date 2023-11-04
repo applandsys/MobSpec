@@ -10,6 +10,7 @@ import {useValidateEmail} from "@/composables/emailValidation";
 import axios from "axios";
 import API_URL from "@/config";
 import {useAuth} from "@/store/auth";
+import router from "@/router";
 
 const isLoading = ref(false);
 
@@ -46,6 +47,7 @@ const submitRequestSend = async (formData: LoginData) =>{
     }
     await authStore.setAuthInfo(authInfoPayload);
     isLoading.value = false;
+    await router.push('/brand');
 }
 
 const signInSubmit = () =>{
