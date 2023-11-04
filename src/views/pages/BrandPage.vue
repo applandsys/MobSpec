@@ -2,7 +2,7 @@
 import PageLayout from "@/views/components/base/PageLayout.vue";
 import { IonGrid, IonRow, IonCol, IonInput, IonIcon, IonButton} from "@ionic/vue";
 import { searchCircleOutline, arrowForwardOutline } from "ionicons/icons";
-import {computed, ref, watch} from "vue";
+import {computed, ref} from "vue";
 import axios from "axios";
 import API_URL from "@/config";
 import {BrandItem} from "@/types/brand";
@@ -30,7 +30,7 @@ const loadBrand = async () =>{
 }
 
 const seeAllBrand = () =>{
-    console.log("fuck hima");
+    searchKeyword.value='';
 }
 
 allBrand.value.length===0 && loadBrand();
