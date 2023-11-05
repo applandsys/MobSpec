@@ -8,7 +8,9 @@ import {
     IonButton,
     IonBackButton,
     IonButtons,
-    IonLoading
+    IonLoading,
+    IonMenu, IonMenuButton,
+    IonItem, IonLabel, IonList
 } from "@ionic/vue";
 
 interface Props{
@@ -18,13 +20,43 @@ interface Props{
 const {pageTitle, isLoading} =  defineProps<Props>();
 </script>
 <template>
-    <ion-page>
+    <div>
+    <ion-menu content-id="main-content">
         <ion-header>
-            <ion-toolbar  translucent>
+            <ion-toolbar>
+                <ion-title>Navigation</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content>
+            <ion-list>
+                <ion-item>
+                    <ion-label>My Wish List</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-label>My Reviews</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-label>My Profile</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Change Password</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-label>My Queries</ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+    <ion-page id="main-content">
+        <ion-header>
+            <ion-toolbar>
                 <ion-buttons slot="start">
                     <ion-button> <ion-back-button></ion-back-button> </ion-button>
                 </ion-buttons>
                 <ion-title>{{pageTitle}}</ion-title>
+                <ion-buttons slot="end">
+                    <ion-menu-button></ion-menu-button>
+                </ion-buttons>
             </ion-toolbar>
         </ion-header>
         <ion-content :fullscreen="true" >
@@ -34,6 +66,7 @@ const {pageTitle, isLoading} =  defineProps<Props>();
         </ion-content>
         <ion-loading :isOpen="isLoading" message="Loading..." spinner="circles"></ion-loading>
     </ion-page>
+    </div>
 </template>
 
 <style scoped>
