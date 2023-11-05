@@ -6,6 +6,7 @@ import SigninPage from "@/views/pages/SigninPage.vue";
 import SignupPage from "@/views/pages/SignupPage.vue";
 import DeviceListPage from "@/views/pages/DevicelistPage.vue";
 import DeviceDetail from "@/views/pages/DeviceDetail.vue";
+import ForgetPassword from "@/views/pages/ForgetPassword.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -41,6 +42,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/signup',
     name: 'Signup',
     component: SignupPage
+  },
+  {
+    path: '/forgetpass',
+    name: 'forgetpass',
+    component: ForgetPassword
   }
 ]
 

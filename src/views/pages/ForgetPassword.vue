@@ -2,7 +2,7 @@
 import PageLayout from "@/views/components/base/PageLayout.vue";
 import InputText from "@/views/components/common/InputText.vue";
 import {IonCol, IonGrid, IonRow, IonButton, IonIcon} from "@ionic/vue";
-import {personCircleOutline, mailOutline, lockClosedOutline} from "ionicons/icons";
+import {personCircleOutline, mailOutline, lockOpenOutline} from "ionicons/icons";
 import {reactive, ref} from "vue";
 import {AuthData, LoginData} from "@/types/userinfo";
 import CommonForm from "@/views/components/common/Form.vue";
@@ -65,18 +65,18 @@ const signInSubmit = () =>{
 
 </script>
 <template>
-    <PageLayout page-title="Sign in">
+    <PageLayout page-title="Reset Password">
         <div id="container">
             <ion-grid>
                 <ion-row>
                     <ion-col class="ion-text-center ion-margin-top">
-                        <ion-icon :src="personCircleOutline" style="font-size: 100px"></ion-icon>
+                        <ion-icon :src="lockOpenOutline" style="font-size: 100px"></ion-icon>
                     </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        <h2 class="ion-text-center app-title">Sign in form</h2>
-                        <p class="ion-text-center ion-color-dark info-text">Sign in to use extra features like give review, rating, fav list etc.</p>
+                        <h2 class="ion-text-center app-title">Password Recovery Form</h2>
+                        <p class="ion-text-center ion-color-dark info-text">In case of forget your password recover it with your email.</p>
                     </ion-col>
                 </ion-row>
                 <CommonForm>
@@ -87,19 +87,8 @@ const signInSubmit = () =>{
                         </ion-col>
                     </ion-row>
                     <ion-row>
-                        <ion-col>
-                            <InputText :icon="lockClosedOutline" placeholder="Input Password"  :model-value="loginForm.password" @update:model-value="newValue => loginForm.password = newValue" :is-required="true"/>
-                            <span class="error-text ion-text-center">{{error.password}}</span>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>
-                           <p class="ion-text-right info-text" @click="() => router.push('/forgetpass')">Forget Password ?</p>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
                         <ion-col class="ion-text-center">
-                            <ion-button class="ion-text-center" shape="round"  color="tertiary" @click="signInSubmit">Sign in</ion-button>
+                            <ion-button class="ion-text-center" shape="round"  color="tertiary" @click="signInSubmit">Send</ion-button>
                         </ion-col>
                     </ion-row>
                 </CommonForm>

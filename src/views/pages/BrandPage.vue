@@ -37,7 +37,6 @@ allBrand.value.length===0 && loadBrand();
 
 const authStore = useAuth();
 
-console.log("authsote", authStore.userInfo);
 
 </script>
 <template>
