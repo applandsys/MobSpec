@@ -5,9 +5,7 @@ import {IonContent, IonPage} from "@ionic/vue";
     <ion-page>
         <ion-content :fullscreen="true">
             <div class="circle-top"></div>
-            <div>
-                <slot></slot>
-            </div>
+            <div> <slot></slot></div>
         </ion-content>
     </ion-page>
 </template>

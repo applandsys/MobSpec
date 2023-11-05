@@ -44,6 +44,9 @@ const {pageTitle, isLoading} =  defineProps<Props>();
                 <ion-item>
                     <ion-label>My Queries</ion-label>
                 </ion-item>
+                <ion-item>
+                    <ion-label>Sign out</ion-label>
+                </ion-item>
             </ion-list>
         </ion-content>
     </ion-menu>
